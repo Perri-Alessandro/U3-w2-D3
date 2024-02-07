@@ -8,7 +8,7 @@ const MyNav = () => (
     <Container className="row">
       <Navbar.Brand href="#" className="col me-0">
         <img
-          src="./logo.png"
+          src="\logo.png"
           style={{ width: "100px", height: "55px" }}
           alt="Logo"
         />
@@ -26,9 +26,8 @@ const MyNav = () => (
             TV Shows
           </Link>
 
-          <Nav.Link href="#" className="fw-bold text-secondary">
-            Movies
-          </Nav.Link>
+          <Link className="nav-link fw-bold text-secondary">Movies</Link>
+
           <Nav.Link href="#" className="fw-bold text-secondary">
             Recently Added
           </Nav.Link>

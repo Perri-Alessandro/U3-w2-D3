@@ -18,7 +18,7 @@ const MovieDetails = () => {
         }
       })
       .then((data) => {
-        console.log("DATI RICEVUTI PER MOVIE", data);
+        console.log("DATI RICEVUTI PER MOVIE DETAILS", data);
         setMovieDetails(data);
         setLoading(false);
       })
@@ -28,6 +28,7 @@ const MovieDetails = () => {
         alert("ERRORE DI COMUNICAZIONE CON IL SERVER");
       });
   }, [movieId]);
+  console.log("ID FILM SELEZIONATO", movieId);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -35,8 +36,8 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <h1>{movieDetails.Title}</h1>
-      <img src="{movieDetails.Poster}" alt="" />
+      <h1 className="text-white">{movieDetails.Title}</h1>
+      <img src={movieDetails.Poster} alt="" />
       {/* <p>{movieDetails.Plot}</p>
       <p>Director: {movieDetails.Director}</p>
       <p>Actors: {movieDetails.Actors}</p> */}
