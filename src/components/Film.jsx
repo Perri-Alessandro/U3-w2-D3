@@ -1,16 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import { Spinner, Row, Col } from "react-bootstrap";
-
+import { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-class Film extends Component {
-  state = {
-    movies: [],
-    loading: true,
-  };
+const Film = ({ h1, endpoint }) => {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  getFilm = (endpoint) => {
-    this.setState({ loading: true });
+  useEffect(() => {
+    getFilm(endpoint);
+  }, [endpoint]);
+
+  const getFilm = (endpoint) => {
+    setLoading(true);
 
     fetch("http://www.omdbapi.com/?i=tt3896198&apikey=b84970d1&s=" + endpoint)
       .then((response) => {
@@ -23,30 +26,27 @@ class Film extends Component {
       })
       .then((oggettoData) => {
         console.log("OGGETTO RICEVUTO", oggettoData);
-        const array = oggettoData.Search;
-        console.log("ARRAY RICEVUTO", array);
-        this.setState({ movies: array, loading: false });
+        setMovies(oggettoData.Search);
+        setLoading(false);
       })
       .catch((err) => {
         console.log("ERRORE NEL CONTATTARE IL SERVER", err);
-        this.setState({ loading: false });
+        setLoading(false);
         alert("ERRORE DI COMUNICAZIONE CON IL SERVER");
       });
   };
-  componentDidMount() {
-    this.getFilm(this.props.endpoint);
-  }
 
-  render() {
-    const { movies, loading } = this.state;
-    return (
-      // ...
-      <>
-        {loading && <Spinner animation="border" variant="success" />}
-        <Row className="text-white g-5 my-2 mx-3">
-          <p className="text-start fs-3">{this.props.h1}</p>
-          {movies.slice(0, 6).map((movie) => (
-            <Col key={movie.imdbID} sm={6} md={4} xl={2}>
+  return (
+    <>
+      {loading && <Spinner animation="border" variant="success" />}
+      <Row className="text-white g-5 my-2 mx-3">
+        <p className="text-start fs-3">{h1}</p>
+        {movies.slice(0, 6).map((movie) => (
+          <Col key={movie.imdbID} sm={6} md={4} xl={2}>
+            <Link
+              to={`/movie-details/${movie.imdbID}`}
+              style={{ textDecoration: "none" }}
+            >
               <Card className="rounded-5" style={{ height: "40vh" }}>
                 <Card.Img
                   className="rounded-top-5"
@@ -61,13 +61,12 @@ class Film extends Component {
                   <p>{movie.Year}</p>
                 </Card.Body>
               </Card>
-            </Col>
-          ))}
-        </Row>
-      </>
-      // ...
-    );
-  }
-}
+            </Link>
+          </Col>
+        ))}
+      </Row>
+    </>
+  );
+};
 
 export default Film;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { FaSearch, FaBell, FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MyNav = () => (
   <Navbar expand="lg" className="container-fluid">
@@ -18,12 +19,13 @@ const MyNav = () => (
       />
       <Navbar.Collapse id="navbarSupportedContent" className="col">
         <Nav className="me-auto  mb-2 mb-lg-0">
-          <Nav.Link href="#" className="fw-bold text-secondary px-0">
+          <Link className="nav-link fw-bold text-secondary px-0" to="/">
             Home
-          </Nav.Link>
-          <Nav.Link href="#" className="fw-bold text-secondary ">
+          </Link>
+          <Link className="nav-link fw-bold text-secondary" to="/tvshow">
             TV Shows
-          </Nav.Link>
+          </Link>
+
           <Nav.Link href="#" className="fw-bold text-secondary">
             Movies
           </Nav.Link>

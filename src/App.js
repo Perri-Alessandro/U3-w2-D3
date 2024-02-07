@@ -3,27 +3,31 @@ import "./App.css";
 import MyFooter from "./components/MyFooterComponent";
 import Welcome from "./components/WelcomeComponent";
 import MyNav from "./components/MyNav";
-import Film from "./components/Film";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TVShows from "./components/TVShows";
+import NotFound from "./components/NotFound";
+import Home from "./components/PaginaIniziale";
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   return (
-    <div className="App bg-dark">
-      <header>
-        <MyNav />
-      </header>
-      <main>
-        {/* SONO TALEMNTE ESPERTO CON LE SERIE TV E FILM CHE HO DOVUTO GOOGLARE PER TROVARNE ALTRE DUE XD */}
-        {/* SO CHE NON è NESSUNA GIUSTIFICAZIONE (Né VUOLE ESSERLA) MA CI TENGO A FARLO PRESENTE, UNA PERSONA MI HA CHIESTO UNA MANO, 
-        ENTRO IN CHIAMATA ED ERANO IN 2 COSì HO DEDICATO VOLENTIERI UN'ORETTA PER DARGLI UNA MANO QUANTO MENO A FAR PARTIRE LA FETCH*/}
-        <Welcome></Welcome>
-        <Film h1="Trending Now" endpoint="StarWars" />
-        <Film h1="Watch it Again" endpoint="The Lord Of The Rings" />
-        <Film h1="New Releases" endpoint="Harry Potter" />
-        <Film h1="Others" endpoint="Friends" />
-        <Film endpoint="Instinct" />
-      </main>
-      <MyFooter />
-    </div>
+    <BrowserRouter>
+      <div className="App bg-dark d-flex flex-column vh-100">
+        <header>
+          <MyNav />
+        </header>
+        <main className="flex-grow-1 bg-dark">
+          <Welcome></Welcome>
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={<TVShows />} path="/tvshow" />
+            <Route element={<NotFound />} path="*" />
+            <Route element={<MovieDetails />} path="/movie-details/:movieId" />
+          </Routes>
+        </main>
+        <MyFooter />
+      </div>
+    </BrowserRouter>
   );
 }
 
