@@ -1,5 +1,3 @@
-// MovieDetails.js
-
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -20,7 +18,7 @@ const MovieDetails = () => {
         }
       })
       .then((data) => {
-        console.log("DATI RICEVUTI", data);
+        console.log("DATI RICEVUTI PER MOVIE", data);
         setMovieDetails(data);
         setLoading(false);
       })
@@ -38,9 +36,10 @@ const MovieDetails = () => {
   return (
     <div>
       <h1>{movieDetails.Title}</h1>
-      <p>{movieDetails.Plot}</p>
+      <img src="{movieDetails.Poster}" alt="" />
+      {/* <p>{movieDetails.Plot}</p>
       <p>Director: {movieDetails.Director}</p>
-      <p>Actors: {movieDetails.Actors}</p>
+      <p>Actors: {movieDetails.Actors}</p> */}
     </div>
   );
 };
